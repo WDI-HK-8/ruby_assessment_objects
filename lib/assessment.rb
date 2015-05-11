@@ -20,7 +20,7 @@ class Player < Person
 
   def initialize(health=20, strength=2, alive=true)
     @health   = health
-    @strength = health
+    @strength = strength
     @alive    = alive
   end
 
