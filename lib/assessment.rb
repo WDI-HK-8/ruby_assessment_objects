@@ -20,10 +20,15 @@ class Player < Person
 
   def take_damage(attack_strength)
     @health -= attack_strength
-    if @
+    puts "#{full_name} takes #{attack_strength} point of damage!"
+    if @health < 0
+      puts "#{full_name} has died"
+      @alive = false
+    end
   end
 
   def attack(player)
+    puts "#{full_name} attacks #{player.full_name}"
     player.take_damage(@strength)
   end
 
@@ -43,5 +48,9 @@ end
 
 richard = Knight.new
 terrence = Wizard.new
-
+richard.first_name = "Richard"
+richard.last_name = "Li"
+terrence.first_name = "Terrence"
+terrence.last_name = "Lun"
 terrence.attack(richard)
+
