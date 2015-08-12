@@ -23,6 +23,20 @@ class Player < Person
 	attr_reader :strength
 
 	attr_accessor :health, :alive
+
+	def attack(player)
+		puts "#{full_name} attacks #{player.full_name}"
+		player.take_damage(self.strength)
+	end
+
+	protected
+	def take_damage(attack_strength)
+		self.health -= attack_strength if @health > 0
+		self.alive = false if @health <= 0
+		if self.alive==false
+			puts "#{self.full_name} is dead."
+		end
+	end 
 end
 
 class Knight < Player
@@ -47,18 +61,10 @@ def fight(player1,player2,player3,player4)
 	while(playerArray.length > 1)
 		for i in 0..playerArray.length-1
 			playerAttacked=([*0..playerArray.length-1] - [i]).sample
-			playerArray[playerAttacked].health -= playerArray[i].strength
-			puts "#{playerArray[i].full_name} attacked #{playerArray[playerAttacked].full_name} for #{playerArray[i].strength} damage."
-			if (playerArray[playerAttacked].health<=0)
-				playerArray[playerAttacked].alive = false
-				puts "#{playerArray[playerAttacked].full_name} is dead."
-			end
+			playerArray[i].attack(playerArray[playerAttacked])
 		end
-		for j in 0..playerArray.length-1
-		    if (playerArray[j].alive==false)
-		        puts "#{playerArray[j].full_name} is removed."
-		        playerArray.delete(playerArray[j])
-		    end
+		playerArray.each do |x|
+			playerArray.delete(x) if x.alive==false
 		end
 	end
 	puts "Congratulations #{playerArray[0].full_name}, you win!"
