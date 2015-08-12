@@ -3,7 +3,12 @@
 # Happy coding!!
 
 class Person
-  attr_accessor :first_name, :last_name, :full_name 
+  attr_accessor :first_name, :last_name
+
+  def full_name
+    "#{first_name} #{last_name}"
+  end
+
 end
 
 class Player < Person
@@ -15,6 +20,7 @@ class Player < Person
 
   def take_damage(attack_strength)
     @health -= attack_strength
+    if @
   end
 
   def attack(player)
@@ -34,3 +40,8 @@ class Wizard < Player
     super(health, strength)
   end
 end
+
+richard = Knight.new
+terrence = Wizard.new
+
+terrence.attack(richard)
