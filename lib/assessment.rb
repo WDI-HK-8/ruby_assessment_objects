@@ -20,11 +20,22 @@ class Player < Person
   end
 
   def take_damage(attack_strength)
-    @health -= attack_strength
+    if attack_strength >= health
+      @alive = false
+      puts alive
+      puts "You killed the motherfucker"
+    else
+      @health -= attack_strength
+    end
+
   end
 
   def attack(player)
-    player.take_damage(strength)
+    if alive
+      player.take_damage(strength)
+    else
+      puts "You're dead man. You can't attack."
+    end
   end
 
   attr_accessor :health,:alive
@@ -54,5 +65,11 @@ end
 
 knight = Knight.new("Yohan","Sihou")
 wizard = Wizard.new("Richie","Bostock")
+
+puts knight.attack(wizard)
+puts wizard.attack(knight)
+
+puts knight.attack(wizard)
+puts knight.attack(wizard)
 
 
