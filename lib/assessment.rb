@@ -8,7 +8,7 @@ class Person
   def full_name
     "#{@first_name} #{@last_name}"
   end
-  
+
   def info
     puts "-"*40
     puts full_name
@@ -39,13 +39,12 @@ class Player < Person
   protected
   def take_damage(attack_strength)
     self.health -= attack_strength if @health > 0
-    @alive = false if @health < 0
+    @alive = false if @health <= 0
   end
 end
 
 class Knight < Player
   def initialize(health=50, strength=7, alive=true)
-    super
     @health   = health
     @strength = strength
     @alive    = alive
@@ -63,7 +62,7 @@ end
 harry = Knight.new
 harry.first_name = "Harry"
 harry.last_name  = "Chen"
-harry.info  
+harry.info
 
 fer   = Wizard.new
 fer.first_name = "Fer"
@@ -77,4 +76,4 @@ harry.attack(fer)
 fer.info
 
 fer.attack(harry)
-harry.info  
+harry.info
